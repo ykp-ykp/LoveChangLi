@@ -70,7 +70,7 @@
       height: auto;
     }
   </style>
-  <img id="music" class="musicImgs" src="./imgs/music.png" onclick="playMusic(event)">
+  <img id="music" class="musicImgs" src="./imgs/music.png" onclick="playMusic('music')">
   <audio class="song-audio-autoplay" controls loop style="display: none;visibility: hidden">
     <source src="./index_files/music.mp3" type="audio/mp3" />
   </audio>
@@ -96,10 +96,10 @@
 
   <script type="text/javascript">
 
-    function playMusic() {
+    function playMusic(target) {
       let m = document.querySelector('.song-audio-autoplay');
       let musicImg = document.querySelector('#music')
-      if (m.paused) {
+      if (m.paused || target === 'heart') {
         m.play();
         musicImg.classList.add('rotateImages')
       }
@@ -116,7 +116,7 @@
     }).reduce((a, b) => {
       return a + b;
     }))
-    $("#clock-box-inside-text").html(`${config.names[0]}<span class="STYLE1">与</span> ${config.names[1]}<span class="STYLE1">已经相恋了</span>`)
+    $("#clock-box-inside-text").html(`现在是${config.names[0]}<span class="STYLE1">与</span> ${config.names[1]}<span class="STYLE1">相恋的</span>`)
   </script>
 
   <script>
@@ -180,7 +180,7 @@
           y = e.pageY - offset.top;
           console.log(0);
           if (seed.hover(x, y)) {
-            playMusic()
+            playMusic('heart')
             hold = 0;
             canvas.unbind("click");
             canvas.unbind("mousemove");
