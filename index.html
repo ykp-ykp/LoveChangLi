@@ -17,11 +17,13 @@
   <script type="text/javascript" src="./index_files/love.js" charset="utf-8"></script>
   <script type="text/javascript" src="./config.js"></script>
   <style type="text/css">
-    <!--
+    body {
+      background-color: pink;
+    }
+
     .STYLE1 {
       color: #b230a3
     }
-    -->
   </style>
 </head>
 
@@ -235,7 +237,7 @@
 
           // 会有闪烁不得意这样做, (＞﹏＜)
           canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-          canvas.css("background", "#ffe");
+          canvas.css("background", "pink");
           $await(Jscex.Async.sleep(300));
           canvas.css("background", "none");
         }));
