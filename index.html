@@ -18,11 +18,32 @@
   <script type="text/javascript" src="./config.js"></script>
   <style type="text/css">
     body {
-      background-color: pink;
+      background-image: url('./imgs/cll.jpg');
+      background-size: 50% auto;
+      background-repeat: repeat;
+      background-position: center;
+      animation: backgroundTransition 15s linear infinite;
+      /* 5秒的过渡时间，linear 缓动函数，无限循环 */
+    }
+
+    @keyframes backgroundTransition {
+      0% {
+        background-position: 0% 0%;
+        /* 初始位置，根据图片数量调整百分比 */
+      }
+
+      100% {
+        background-position: 100% 0%;
+        /* 结束位置，根据图片数量调整百分比 */
+      }
     }
 
     .STYLE1 {
       color: #b230a3
+    }
+
+    #canvasContainer {
+      opacity: 0.6;
     }
   </style>
 </head>
@@ -91,7 +112,9 @@
         </span>
         <div id="clock"></div>
       </div>
-      <canvas id="canvas" width="1100" height="680"></canvas>
+      <div id="canvasContainer">
+        <canvas id="canvas" width="1100" height="680"></canvas>
+      </div>
     </div>
 
   </div>
@@ -160,7 +183,7 @@
             ]]
           ],
           bloom: {
-            num: 700,
+            num: 550,
             width: 1080,
             height: 650,
           },
@@ -197,6 +220,7 @@
         });
 
         var seedAnimate = eval(Jscex.compile("async", function () {
+          console.log(3);
           seed.draw();
           while (hold) {
             $await(Jscex.Async.sleep(10));
@@ -213,6 +237,7 @@
         }));
 
         var growAnimate = eval(Jscex.compile("async", function () {
+          console.log(5);
           do {
             tree.grow();
             $await(Jscex.Async.sleep(10));
@@ -220,6 +245,7 @@
         }));
 
         var flowAnimate = eval(Jscex.compile("async", function () {
+          console.log(6);
           do {
             tree.flower(2);
             $await(Jscex.Async.sleep(10));
@@ -227,6 +253,7 @@
         }));
 
         var moveAnimate = eval(Jscex.compile("async", function () {
+          console.log(7);
           tree.snapshot("p1", 240, 0, 610, 680);
           while (tree.move("p1", 500, 0)) {
             foot.draw();
@@ -237,12 +264,13 @@
 
           // 会有闪烁不得意这样做, (＞﹏＜)
           canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-          canvas.css("background", "pink");
+          // canvas.css("background", "pink");
           $await(Jscex.Async.sleep(300));
           canvas.css("background", "none");
         }));
 
         var jumpAnimate = eval(Jscex.compile("async", function () {
+          console.log(8);
           var ctx = tree.ctx;
           while (true) {
             tree.ctx.clearRect(0, 0, width, height);
@@ -253,6 +281,7 @@
         }));
 
         var textAnimate = eval(Jscex.compile("async", function () {
+          console.log(9);
           var together = new Date(config.date);
 
           $("#code").show().typewriter();
